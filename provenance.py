@@ -13,7 +13,7 @@ from lineage import FILES, DEFS, num, parts
 
 REPORTS={'11013':'1분기보고서','11012':'반기보고서','11014':'3분기보고서','11011':'사업보고서'}
 PURPOSE={'versions':'공시 버전·접수일·이용 가능일 관리','facts':'XML 원문 기간별 금액과 위치','quarters':'공시 시점별 단독 분기 변환','core':'핵심 재무 입력·분기/현금흐름 지표','events':'공시 이벤트별 NOA·DuPont·Ohlson 입력','daily':'거래일별 이용 가능한 재무 입력','companies':'기업고유번호와 종목코드 매핑'}
-PARENTS={'versions':['기업_종목_매핑표.csv','OpenDART 공시목록'],'facts':[FILES['versions'],'공시 원문 XML'],'quarters':[FILES['facts']],'core':[FILES['quarters'],FILES['facts']],'events':[FILES['facts'],FILES['quarters'],'04_전체원본계정_통합.csv'],'daily':[FILES['events'],FILES['core'],'거래일 자료'],'companies':['OpenDART 기업정보']}
+PARENTS={'versions':['기업_종목_매핑표.csv','OpenDART 공시목록'],'facts':[FILES['versions'],'공시 원문 XML'],'quarters':[FILES['facts']],'core':[FILES['quarters'],FILES['facts']],'events':[FILES['core'],FILES['facts'],FILES['quarters'],'04_전체원본계정_통합.csv'],'daily':[FILES['events'],'04_일별_핵심재무입력_corp추가.csv'],'companies':['OpenDART 기업정보']}
 KEYS={'versions':['corp_code','stock_code','rcept_no'],'facts':['fact_id'],'quarters':['corp_code','stock_code','fs_div','as_of_available_from','trigger_receipt','fiscal_year','quarter','metric'],'core':['corp_code','stock_code','fs_div','as_of_available_from','trigger_receipt'],'events':['corp_code','stock_code','fs_div','as_of_available_from','trigger_receipt'],'daily':['stock_code','trade_date','fs_div'],'companies':['corp_code','stock_code']}
 MEANINGS={'corp_code':'DART 기업고유번호','stock_code':'거래소 종목코드','rcept_no':'해당 공시 접수번호','source_receipt':'원천 금액이 나온 공시 접수번호','trigger_receipt':'계산 이벤트를 발생시킨 공시','latest_period_receipt':'선택된 최신 회계기간의 공시','available_from':'전달 데이터의 이용 가능일','as_of_available_from':'계산 이벤트의 이용 가능일','publication_date':'공시 공개 날짜','rcept_dt':'원본에 저장된 공시 접수일','trade_date':'일별 입력의 거래일','fiscal_year':'금액 대상 회계연도','business_year':'보고서 회계연도','quarter':'금액 대상 분기','fs_div':'연결 CFS·별도 OFS','metric':'재무 항목','period_kind':'기간 유형: 기말 잔액·누적·단독','amount_krw':'원 단위 원천 금액','single_quarter_amount_krw':'변환된 단독 분기 금액','fact_id':'기간별 금액 행의 식별자','source_fact_ids':'사용된 원천 행 ID 전체','source_receipts':'사용된 공시 접수번호 전체','source_file':'원천 파일 참조','source_column':'원문 금액 열 위치','table_index':'원문 표의 검색 위치','account_nm':'원문 재무계정명','report_nm':'실제 DART 보고서 제목','report_code':'정기보고서 종류 코드','is_revision':'정정공시 여부','raw_cell':'원문에 표시된 금액 문자열','header_text':'금액 열의 기간 머리말','source_unit':'원문 표시 단위','status':'원천 행의 처리 상태','calculation':'분기 변환 방법','unavailable_reason':'변환값 미확보 사유'}
 
@@ -60,7 +60,7 @@ class Provenance:
         self.comparisons=None
         self.file_index={}
         # Opaque IDs, server-owned allowlist; no client-supplied filesystem paths.
-        folders=[self.root]
+        folders=[p for p in self.root.iterdir() if p.is_dir() and p.name not in ('dashboard','.git','.codex','.agents')]
         for folder in folders:
             for p in folder.rglob('*.csv'):
                 if p.is_file() and p.resolve().is_relative_to(self.root.resolve()) and p.relative_to(self.root).parts[0] not in ('dashboard','.git','.codex','.agents'):
@@ -203,6 +203,8 @@ class Provenance:
                         'models':[m for m,v in DEFS.items() if c in v[2]] + ([c] if c in DEFS else [])} for c in columns]}
 
     def column(self,fid,column,stock,fs,asof):
+        if re.search(r'api[_-]?key|crtfc[_-]?key|access[_-]?token|refresh[_-]?token|password|secret|authorization|cookie',column,re.I):
+            raise ValueError('비밀정보 관련 컬럼의 예시는 제공하지 않습니다.')
         profile=self.profile(fid);meta=next((c for c in profile['columns'] if c['name']==column),None)
         if meta is None:raise ValueError('실제 CSV 컬럼을 선택하세요.')
         out=[]
@@ -220,6 +222,7 @@ class Provenance:
                 if rid and not self.s.visible(rid,asof,stock):continue
                 value=r.get(column)
                 if value in ('',None):continue
+                value=re.sub(r'(?i)([?&](?:crtfc_key|api_key|access_token|token)=)[^&\s]+',r'\1[REDACTED]',value)
                 if column in ('source_file','source_document','source_document_path','main_html_file','fallback_archive') or re.match(r'^[A-Za-z]:[\\/]',value):
                     value=Path(value.replace('\\','/')).name
                 out.append({'value':value,'row':{k:r[k] for k in ('corp_code','stock_code','fs_div','fiscal_year','quarter','trade_date','fact_id','source_receipt','trigger_receipt','rcept_no','as_of_available_from','available_from') if k in r},

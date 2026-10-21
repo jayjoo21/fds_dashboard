@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-21T07:13:12.801342+00:00",
+  "generated_at_utc": "2026-10-21T07:34:31.846748+00:00",
   "join": "01.rcept_no = 02.source_receipt; 03/25 fact_id lists retain many-to-many links. NOA edges use original selection rules and amount checks.",
   "publication_time_policy": "NULL when official intraday time is unavailable. No receipt-number or midnight inference.",
   "records": [

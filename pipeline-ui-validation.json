@@ -1,0 +1,55 @@
+{
+  "checked_at_utc": "2026-10-21T07:36:51.997719+00:00",
+  "successful": true,
+  "browser": "ChatGPT in-app browser",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "checks": [
+    "독립 메뉴와 9개 하위 화면",
+    "React Flow 7단계 및 단계·컬럼 선택",
+    "실제 CSV 스키마·행 수·결측 및 제한된 행 예시",
+    "수식 변수·계보·복수 보고서 연결",
+    "원문 표제·API 계정 ID 정확 대조",
+    "켐트로닉스 2019Q3 누적·단독 금액 일치",
+    "공통 출처 패널·XML 표/행 및 계정·금액 강조",
+    "2017-09-06 최초 반기 / 09-07 정정 반기 선택",
+    "보고서 종류·연도 필터",
+    "원천 오류 3건 중 실제 경고 화면 확인",
+    "OFS 귀속 자본·순이익 결측 유지",
+    "키보드 노드·수식 선택",
+    "모바일·태블릿 페이지 가로 넘침 없음",
+    "실제 자료·가상 CUSUM·연구 예정 상태 구분",
+    "동작 줄이기 정책: body reduced·노드 transition 0s",
+    "모바일 React Flow 최소 초기 배율 0.85 확인",
+    "최종 브라우저 오류 로그 없음",
+    "메인 제목 정확한 문구 확인"
+  ],
+  "limitations": [
+    "실제 사용자 3분 이해도 평가는 별도",
+    "공개시각 476건 NULL",
+    "원문 기간 태그 27건 미확인",
+    "원천 의미·API ID 매핑 미확정은 NULL 유지",
+    "외부 공개 권한·공시 사본 이용조건 법률 검토 미완료",
+    "OS 설정 자체는 변경하지 않음. 수동 동작 줄이기와 동일 정책 경로 검증"
+  ],
+  "screenshots": [
+    "pipeline-flow.png",
+    "pipeline-mobile.png",
+    "source-mobile.png",
+    "source-report-panel.png",
+    "overview-content.png"
+  ],
+  "original_csv_hashes_unchanged": true
+}

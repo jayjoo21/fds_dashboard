@@ -1,0 +1,16 @@
+{
+  "packages": {
+    "@xyflow/react": "12.12.0",
+    "esbuild": "0.28.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "documentation": "https://reactflow.dev/learn",
+  "build_source": "client/flow.jsx",
+  "bundles": {
+    "flow-vendor.js": "03e8ce4e6cbd1933b504869a999bdd2873f271ce6a7982d83ecea8a93cc6309d",
+    "flow-vendor.css": "1243b61a71923367ce620fb944427c80c9b03e863e18374fcf4f74d6d06f63fc"
+  },
+  "license_notices": "web/flow-vendor.js.LEGAL.txt",
+  "network": "Bundled locally; no runtime CDN request."
+}

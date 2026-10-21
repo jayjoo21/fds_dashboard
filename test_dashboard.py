@@ -128,6 +128,7 @@ class DashboardTests(unittest.TestCase):
         self.assertEqual(p.column(item['id'],'sales_ttm','089010','CFS','2010-01-01')['examples'],[])
         with self.assertRaises(ValueError):p.profile('../../OPENDART_API_KEY.txt')
         with self.assertRaises(ValueError):p.column(item['id'],'not_a_column','089010','CFS','2019-12-31')
+        with self.assertRaises(ValueError):p.column(item['id'],'crtfc_key','089010','CFS','2019-12-31')
 
     def test_quarter_actual_ytd_subtraction_and_direct_statement_comparison(self):
         p=self.s.provenance()
