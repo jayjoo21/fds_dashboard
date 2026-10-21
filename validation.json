@@ -1,0 +1,16 @@
+{
+  "checked_at_utc": "2026-10-21T07:13:13.241424+00:00",
+  "successful": true,
+  "tests_run": 17,
+  "failures": 0,
+  "errors": 0,
+  "companies": 20,
+  "event_rows": 904,
+  "metrics_per_row": 8,
+  "xml_documents": 51,
+  "review_rows": 185,
+  "new_source_rows": 9,
+  "default_stock": "089010",
+  "default_complete_cfs_events": 17,
+  "scope": "CSV/API mapping, formula/source reconciliation, PIT/CFS/OFS separation, XML hash/search and local HTTP isolation; not a full accounting semantic audit"
+}

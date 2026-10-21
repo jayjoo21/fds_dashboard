@@ -1,0 +1,134 @@
+{
+  "successful": true,
+  "checked_at_utc": "2026-10-21T06:31:50.978505+00:00",
+  "method": "Interactive browser verification in Codex IAB; locator actions plus native touch for sticky controls",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "checks": [
+    "Seven Explore scenes and timeline jumps verified on desktop and mobile",
+    "Intersection Observer activated scene 2 from narrative scroll independently of node/timeline handlers; desktop sticky top measured at 85px",
+    "Explore and all four Workspace pages: document width <= viewport in all three sizes",
+    "Explore/Workspace mode switch and selected-stage restoration via actual mobile touch",
+    "Mobile branch toggle between real PM series and raw KRX closing prices",
+    "Mobile full-map dialog opens and closes while preserving selected scene",
+    "Chart click opens right evidence dialog; close button receives focus and nested term detail works",
+    "Real 052270 owner equity observation for annual 2016 traced to receipt 20170331001179 and XML table 56 row 40, amount (98,845,420,612)",
+    "Financial and raw-price charts shared comparison date 2019-11-14 without interpolating values",
+    "Manual reduce-motion option: body policy reduced, computed transition duration 0s and text opacity 1",
+    "Motion, Intersection Observer and matchMedia preference handling implemented with same-origin library delivery",
+    "No browser JavaScript errors observed in final checks"
+  ],
+  "preserved_data_tests": {
+    "path": "validation.json",
+    "tests": 9,
+    "successful": true
+  },
+  "limits": [
+    "Three-minute understanding is a design target, not a completed human usability study",
+    "OS prefers-reduced-motion hook reviewed; browser manual override was exercised, OS setting was not changed",
+    "Hover handlers retained; click/tap/focus paths exercised, no separate pointer-hover automation",
+    "Real price detection, adjusted-price validation, RAG and final financial judgment remain research/development pending"
+  ],
+  "final_scene_checks": [
+    {
+      "viewport_width": 1440,
+      "step": 1,
+      "active_scene": "0",
+      "passed": true
+    },
+    {
+      "viewport_width": 1440,
+      "step": 2,
+      "active_scene": "1",
+      "passed": true
+    },
+    {
+      "viewport_width": 1440,
+      "step": 3,
+      "active_scene": "2",
+      "passed": true
+    },
+    {
+      "viewport_width": 1440,
+      "step": 4,
+      "active_scene": "3",
+      "passed": true
+    },
+    {
+      "viewport_width": 1440,
+      "step": 5,
+      "active_scene": "4",
+      "passed": true
+    },
+    {
+      "viewport_width": 1440,
+      "step": 6,
+      "active_scene": "5",
+      "passed": true
+    },
+    {
+      "viewport_width": 1440,
+      "step": 7,
+      "active_scene": "6",
+      "passed": true
+    },
+    {
+      "viewport_width": 390,
+      "step": 1,
+      "active_scene": "0",
+      "passed": true
+    },
+    {
+      "viewport_width": 390,
+      "step": 2,
+      "active_scene": "1",
+      "passed": true
+    },
+    {
+      "viewport_width": 390,
+      "step": 3,
+      "active_scene": "2",
+      "passed": true
+    },
+    {
+      "viewport_width": 390,
+      "step": 4,
+      "active_scene": "3",
+      "passed": true
+    },
+    {
+      "viewport_width": 390,
+      "step": 5,
+      "active_scene": "4",
+      "passed": true
+    },
+    {
+      "viewport_width": 390,
+      "step": 6,
+      "active_scene": "5",
+      "passed": true
+    },
+    {
+      "viewport_width": 390,
+      "step": 7,
+      "active_scene": "6",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    "visual-story-explore.png",
+    "visual-story-evidence.png"
+  ]
+}

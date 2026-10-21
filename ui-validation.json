@@ -1,0 +1,55 @@
+{
+  "successful": true,
+  "checked_at_utc": "2026-10-21T06:28:30.842057+00:00",
+  "method": "Interactive browser verification through Codex in-app browser",
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "width": 1024,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "glossary_terms_verified": 17,
+  "checks": [
+    "8 clickable pipeline nodes and connected edge highlighting",
+    "L1/L2/L3 depth selection and slow/sudden/rebuttal distinction",
+    "17 glossary detail panels, formulas, actual related data and limits",
+    "Short explanation on click, keyboard focus and mobile tap; detail dialog focus/close",
+    "Keyboard chart point selection to five-step evidence rail",
+    "Real 052270 annual 2016 owner equity to receipt 20170331001179, XML table 56 row 40 and amount 98,845,420,612",
+    "Original/revised same-period observations and publication/availability dates",
+    "CUSUM synthetic residuals: h=12 produced 0 threshold-exceeding points, h=1 produced 22 of 30",
+    "OFS owner-equity marked not applicable",
+    "Five mobile pages have document scrollWidth 375 <= viewport 390",
+    "Opinion input remains browser memory only and resets on reload",
+    "No browser JavaScript errors observed",
+    "All five desktop pages have scrollWidth <= viewport 1440",
+    "Chart redraw on viewport change confirmed: viewBox changed from 960 to 460 without page reload",
+    "Same-day original/revision comparison verified for 052270 receipts 20191112000066 and 20191112000093, both available 2019-11-13",
+    "Seven Explore scenes and timeline jumps verified on desktop and mobile",
+    "Intersection Observer activated scene 2 from narrative scroll independently of node/timeline handlers; desktop sticky top measured at 85px",
+    "Explore and all four Workspace pages: document width <= viewport in all three sizes",
+    "Explore/Workspace mode switch and selected-stage restoration via actual mobile touch",
+    "Mobile branch toggle between real PM series and raw KRX closing prices",
+    "Mobile full-map dialog opens and closes while preserving selected scene",
+    "Chart click opens right evidence dialog; close button receives focus and nested term detail works",
+    "Real 052270 owner equity observation for annual 2016 traced to receipt 20170331001179 and XML table 56 row 40, amount (98,845,420,612)",
+    "Financial and raw-price charts shared comparison date 2019-11-14 without interpolating values",
+    "Manual reduce-motion option: body policy reduced, computed transition duration 0s and text opacity 1",
+    "Motion, Intersection Observer and matchMedia preference handling implemented with same-origin library delivery",
+    "No browser JavaScript errors observed in final checks"
+  ],
+  "limits": [
+    "Hover handlers implemented; short tips and chart tips checked via click/focus rather than separate pointer-hover automation",
+    "No independent 3-minute comprehension study or screen-reader audit",
+    "Raw prices remain unadjusted/unverified; real detection, RAG and judgment models not implemented"
+  ],
+  "visual_story_validation": "visual-story-validation.json"
+}
