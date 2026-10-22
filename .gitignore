@@ -1,0 +1,30 @@
+# Local credentials and environment
+.env
+.env.*
+!.env.example
+!.env.sample
+**/credentials*.json
+**/client_secret*.json
+**/token.json
+**/tokens.json
+*.pem
+*.key
+*.p12
+*.pfx
+# Local databases and backups
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.dump
+*.bak
+# Original financial data stays outside Git
+*.csv
+*.xml
+# Generated dependencies and runtime caches
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.log
