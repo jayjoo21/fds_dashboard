@@ -1,0 +1,37 @@
+{
+  "samples": [
+    {
+      "date": "2015-01-02",
+      "expected": "9650",
+      "ui": "9650"
+    },
+    {
+      "date": "2017-06-28",
+      "expected": "6540",
+      "ui": "6540"
+    },
+    {
+      "date": "2019-12-30",
+      "expected": "18050",
+      "ui": "18050"
+    }
+  ],
+  "mobile": {
+    "width": 390,
+    "scrollWidth": 375,
+    "rendered": 1227,
+    "selected": "2017-06-28",
+    "close": 6540,
+    "draftPreservedAfterBrush": true
+  },
+  "desktop": {
+    "rendered": 1227
+  },
+  "missingDate": "2019-12-29",
+  "missingPeriod": "2010",
+  "lineage": {
+    "fact_id": "F030167",
+    "receipt": "20191113000024",
+    "review": true
+  }
+}

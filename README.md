@@ -124,3 +124,53 @@ React Flow 번들 소스는 `client/flow.jsx`, 고정 버전/무결성은 `clien
 ```powershell
 node dashboard/client/node_modules/esbuild/bin/esbuild dashboard/client/flow.jsx --bundle --minify --format=iife --define:process.env.NODE_ENV='"production"' --outfile=dashboard/web/flow-vendor.js --legal-comments=linked
 ```
+
+## 개인 노트북 인계 점검 (2026-10-21)
+
+이 절은 현재 복제본에서 새로 확인한 결과입니다. 위의 기존 검증 기록은 이전 산출물이며 이 컴퓨터에서 재검증한 결과가 아닙니다.
+
+- 실제 저장소: `C:\code\fds_dashboard\fds_dashboard`, 브랜치 `main`, 작업 시작 HEAD `46b976b` (`second commit`), 이전 커밋 `ea7e595`. 작업 시작 시 변경 파일 없음.
+- 현재 코드는 `dashboard/` 하위가 아니라 저장소 루트에 있습니다. `server.py`(Python 표준 라이브러리), `lineage.py`(계산 계보), `provenance.py`(보고서·컬럼 계보), `web/`(기본 JavaScript/CSS 및 로컬 Motion·React Flow 번들), `client/flow.jsx`(흐름도 소스), `derived/`(기존 메타데이터)로 구성됩니다.
+- 기존 화면: 프로젝트 개요의 7단계 스크롤 설명, 기업 분석, 금융모형, 공시 근거, 데이터 처리 과정, 개발 현황. 시계열 Hover/키보드 선택, 공통 날짜 커서, 수식 입력·원문 패널, Motion 및 동작 줄이기 처리가 코드에 존재합니다.
+- 실제 금융 데이터와 XML은 이 복제본에 없습니다. 과거 README의 20개 기업·904개 이벤트·51개 XML 등 건수는 현재 데이터로 재확인하지 못했습니다. F-Score·Ohlson 가치 추정·CUSUM 실제 기업 탐지는 기존 코드에서도 연구/입력 미확보 상태입니다.
+- 새 수정 DuPont 화면은 기존 `plot`, `renderLabBody`, `openLineage`와 동일한 API를 재사용합니다. PM·ATO·OpROA 선택, 관측 시점 선택, 계산·CSV·계정·공시 계보, 보고서명·접수번호·공시일·이용 가능일 표시를 연결했습니다. 화면의 관측값과 계산 로직은 새로 생성하지 않습니다. REVIEW는 원문 금액 및 의미 재검증을 뜻하며 개별 계산 대조와 구분합니다.
+
+### 이 복제본 실행
+
+현재 저장소 루트에서 실행합니다. Python 3.10 이상이 필요합니다. UI 번들은 포함되어 있어 일반 실행에 npm 설치는 필요 없습니다. 일부 XML 검색에는 선택 의존성 `lxml`이 필요합니다. `client/package-lock.json`은 현재 복제본에 없으므로 기존 README의 `npm ci` 명령은 그대로 실행할 수 없습니다.
+
+```powershell
+Set-Location C:\code\fds_dashboard\fds_dashboard
+.\start.ps1 -Port 8766
+# 또는
+python server.py --port 8766
+```
+
+브라우저: http://127.0.0.1:8766 . 데이터 없이도 수정 DuPont 안내 화면을 열 수 있습니다. `/api/data-status`는 파일 존재 여부와 누락 파일명을 반환하고, 데이터가 없으면 금융 API는 503을 반환합니다.
+
+### 복원할 데이터
+
+기존 기본 경로는 저장소 **상위**의 `OpenDART_보완통합본/OpenDART_TTM_팀원전달_최종본/`입니다. 또는 PowerShell에서 `$env:DART_DATA_DIR`에 원본 최종본 폴더를 지정하고 서버를 재시작합니다.
+
+누락된 필수 CSV 10개:
+
+- `01_공시버전_이용가능일_corp추가.csv`
+- `02_원문기간별금액_corp추가.csv`
+- `03_공시시점별_분기변환_corp추가.csv`
+- `08_공시시점별_핵심지표_corp추가.csv`
+- `25_공시시점별_NOA_DuPont_Ohlson_입력_최종.csv`
+- `26_일별_NOA_DuPont_Ohlson_입력_최종.csv`
+- `기업_종목_매핑표.csv`
+- `검증·보완자료/28_연간CFS_185건_원문검증_최종.csv`
+- `검증·보완자료/신규_원천계정_보완.csv`
+- `검증·보완자료/원문검증_근거목록.csv`
+
+추가로 `검증·보완자료/공시원문/*.xml`, 최종본 상위의 `04_전체원본계정_통합.csv`, 기존 KRX 가격 폴더, 기획 PDF 및 독립 감사 원문 경로도 현재 없습니다. `derived/`의 기존 JSON만으로 금융값을 복원하거나 검증 완료를 판단하지 않습니다. 원본 데이터 처리 코드·CSV·수식은 변경하지 않았습니다.
+
+### 이번 확인 범위와 남은 작업
+
+- 새 JavaScript 구문 검사 및 Python 컴파일 통과.
+- 실제 개발 서버에서 HTML·새 JS·CSS 200, data-status 누락 10개 응답 확인.
+- 브라우저에서 수정 DuPont 화면 렌더링, REVIEW, 결측 표시, PM 선택 상태 변경, 누락 목록 확인.
+- 기존 `python -m unittest discover -s . -v`는 기업 매핑 CSV 누락으로 setUpClass에서 실패(실행된 데이터 테스트 0개). 통과로 기록하지 않습니다.
+- 실제 CSV 복원 후 시계열 포인트 선택→실제 값 대입→원천 계정→DART 연결, 기업/기간 변경, 모바일 레이아웃 및 원문 금액·회계 의미 재검증이 남아 있습니다. 현재 화면을 실제 기업 데이터 연결까지 완성된 것으로 표시하지 않습니다.

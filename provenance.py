@@ -1,4 +1,5 @@
 """Source metadata, bounded CSV profiling, and existing independent audit results."""
+import os
 import csv
 import codecs
 import hashlib
@@ -37,7 +38,7 @@ def iso(v):
 
 class Provenance:
     def __init__(self,store):
-        self.s=store;self.root=Path(__file__).resolve().parents[1];self.audit=self.root/'audit_20261021'
+        self.s=store;self.root=Path(__file__).resolve().parents[1];self.audit=Path(os.environ.get('DART_AUDIT_DIR', str(self.root/'audit_20261021')))
         self.official={}
         for p in (self.audit/'official').glob('list_*.json'):
             d=json.loads(p.read_text(encoding='utf-8-sig'))

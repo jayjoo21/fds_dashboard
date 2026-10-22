@@ -31,6 +31,12 @@ METRICS = {
 }
 STATUS = {'verified_existing_value': '기존 금액 일치', 'verified_new_value': '신규 금액 확인', 'verified_not_reported': '원문 미표시', 'not_applicable': '해당 없음', 'semantic_review_required': '의미 검토 보류', 'source_unavailable': '원문 미확보'}
 
+def price_csv_path():
+    # Explicit process-local source override; preserve the historical default.
+    configured = os.environ.get('DART_PRICE_CSV')
+    return Path(configured) if configured else ROOT / 'KRX_20종목_2015-2025_확보자료' / '01_종목가격_2015-2025_수정주가미확인.csv'
+
+
 def read_csv(path):
     with path.open(encoding='utf-8-sig', newline='') as f:
         return list(csv.DictReader(f))
@@ -59,7 +65,7 @@ class Store:
         self._provenance = None
         self.by_fact = {r['fact_id']: r for r in self.facts}
         self.owner_accounts = defaultdict(list)
-        raw_path = package.parent / '04_전체원본계정_통합.csv'
+        raw_path = Path(os.environ.get('DART_OWNER_ACCOUNTS', str(package.parent / '04_전체원본계정_통합.csv')))
         if raw_path.exists():
             for r in read_csv(raw_path):
                 if r['account_id'] in {'ifrs_EquityAttributableToOwnersOfParent', 'ifrs-full_EquityAttributableToOwnersOfParent', 'ifrs_ProfitLossAttributableToOwnersOfParent', 'ifrs-full_ProfitLossAttributableToOwnersOfParent'}:
@@ -87,18 +93,24 @@ class Store:
         self.scores = scores
         self.coverage = coverage
         self.prices = defaultdict(list)
-        price_path = ROOT / 'KRX_20종목_2015-2025_확보자료' / '01_종목가격_2015-2025_수정주가미확인.csv'
-        if price_path.exists():
-            for r in read_csv(price_path):
+        self.price_path = price_csv_path()
+        self.price_source_rows = read_csv(self.price_path) if self.price_path.exists() else []
+        if self.price_source_rows:
+            for r in self.price_source_rows:
                 if number(r['close']) is not None:
                     self.prices[r['stock_code']].append({'date':r['trade_date'], 'close':number(r['close'])})
             for rows in self.prices.values():
                 rows.sort(key=lambda r:r['date'])
 
     def price_series(self, stock, start, asof):
-        return {'status':'실제 관측 · 수정주가 미확인', 'unit':'원', 'source':'제공 KRX 종목가격 CSV',
-                'note':'분할·증자 등 조정 미검증. 수익률·경보·가치훼손 판정에 사용하지 않습니다.',
-                'points':[r for r in self.prices[stock] if start <= r['date'] <= asof]}
+        points = [r for r in self.prices[stock] if start <= r['date'] <= asof]
+        return {'status':'실제 원본 관측 · 조정 여부 미확인 종가', 'unit':'원',
+                'source':'제공 종목가격 CSV', 'file':self.price_path.name,
+                'adjustment_status':'unverified', 'volume_status':'not_provided',
+                'quality_status':'not_fully_validated', 'date_basis':'원본 trade_date · 실제 거래일',
+                'observation_count':len(points), 'source_row_count':len(self.price_source_rows),
+                'note':'종가 조정 여부·전체 가격 품질 미검증. 거래량 미제공. 수익률·경보·가치훼손 판정에 사용하지 않습니다.',
+                'points':points}
 
     def lineage(self):
         if self._lineage is None:
@@ -350,6 +362,10 @@ def make_handler(store):
             parsed = urlparse(self.path)
             args = {k: v[0] for k, v in parse_qs(parsed.query).items()}
             try:
+                if parsed.path == '/api/data-status':
+                    return self.send_json(data_status())
+                if parsed.path.startswith('/api/') and store is None:
+                    return self.send_json({'error': '필수 데이터 파일이 없습니다. 수정 DuPont 화면의 누락 파일 목록을 확인하세요.', 'status': 'REVIEW'}, 503)
                 if parsed.path == '/api/catalog':
                     return self.send_json(store.catalog())
                 if parsed.path == '/api/project':
@@ -402,7 +418,18 @@ def make_handler(store):
                     return self.send_json({'error': '없는 API입니다.'}, 404)
                 if parsed.path == '/reference/plan.pdf':
                     return self.respond((ROOT/'기획PT_261015.pdf').read_bytes(), 'application/pdf')
-                files = {'/': ('index.html', 'text/html'), '/app.js': ('app.js', 'text/javascript'), '/platform.js': ('platform.js', 'text/javascript'), '/story.js': ('story.js', 'text/javascript'), '/lineage.js': ('lineage.js', 'text/javascript'), '/pipeline.js': ('pipeline.js','text/javascript'), '/pipeline.css': ('pipeline.css','text/css'), '/flow-vendor.js': ('flow-vendor.js','text/javascript'), '/flow-vendor.css': ('flow-vendor.css','text/css'), '/motion-vendor.js': ('motion-vendor.js', 'text/javascript'), '/style.css': ('style.css', 'text/css')}
+                files = {'/': ('index.html', 'text/html'), '/app.js': ('app.js', 'text/javascript'), '/platform.js': ('platform.js', 'text/javascript'), '/story.js': ('story.js', 'text/javascript'), '/lineage.js': ('lineage.js', 'text/javascript'), '/pipeline.js': ('pipeline.js','text/javascript'), '/pipeline.css': ('pipeline.css','text/css'), '/dupont.js': ('dupont.js','text/javascript'), '/dupont.css': ('dupont.css','text/css'), '/flow-vendor.js': ('flow-vendor.js','text/javascript'), '/flow-vendor.css': ('flow-vendor.css','text/css'), '/motion-vendor.js': ('motion-vendor.js', 'text/javascript'), '/style.css': ('style.css', 'text/css')}
+                # Isolated design prototypes; existing pages and API handlers are unchanged.
+                files.update({
+                    '/research/company': ('research/index.html', 'text/html'),
+                    '/research/lineage': ('research/index.html', 'text/html'),
+                    '/research/app.js': ('research/app.js', 'text/javascript'),
+                    '/research/style.css': ('research/style.css', 'text/css'),
+                    '/design-preview/overview': ('design-preview/index.html', 'text/html'),
+                    '/design-preview/dupont': ('design-preview/index.html', 'text/html'),
+                    '/design-preview/style.css': ('design-preview/style.css', 'text/css'),
+                    '/design-preview/app.js': ('design-preview/app.js', 'text/javascript'),
+                })
                 if parsed.path not in files:
                     return self.send_json({'error': '파일 접근이 허용되지 않습니다.'}, 404)
                 file, mime = files[parsed.path]
@@ -427,10 +454,22 @@ def make_handler(store):
 
     return Handler
 
+def data_status():
+    from lineage import FILES
+    required = list(FILES.values()) + [
+        '검증·보완자료/28_연간CFS_185건_원문검증_최종.csv',
+        '검증·보완자료/신규_원천계정_보완.csv',
+        '검증·보완자료/원문검증_근거목록.csv',
+    ]
+    missing = [name for name in required if not (PACKAGE / name).is_file()]
+    return {'ready': not missing, 'status': 'REVIEW', 'missing': missing,
+            'location': 'DART_DATA_DIR 또는 저장소 상위/OpenDART_보완통합본/OpenDART_TTM_팀원전달_최종본',
+            'note': '파일 존재 여부만 확인합니다. 금액·회계 의미의 검증 완료를 뜻하지 않습니다.'}
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8765)
     args = parser.parse_args()
-    server = ThreadingHTTPServer(('127.0.0.1', args.port), make_handler(Store()))
+    server = ThreadingHTTPServer(('127.0.0.1', args.port), make_handler(Store() if data_status()['ready'] else None))
     print(f'OpenDART dashboard: http://127.0.0.1:{args.port}', flush=True)
     server.serve_forever()

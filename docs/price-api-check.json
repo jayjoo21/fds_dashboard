@@ -1,0 +1,28 @@
+{
+  "api_count": 1227,
+  "source_rows": 50317,
+  "source_file": "1_개별종목가격.csv",
+  "status": "실제 원본 관측 · 조정 여부 미확인 종가",
+  "adjustment_status": "unverified",
+  "volume_status": "not_provided",
+  "quality_status": "not_fully_validated",
+  "comparisons": [
+    {
+      "date": "2015-01-02",
+      "csv_close": "9650",
+      "api_close": 9650.0
+    },
+    {
+      "date": "2017-06-28",
+      "csv_close": "6540",
+      "api_close": 6540.0
+    },
+    {
+      "date": "2019-12-30",
+      "csv_close": "18050",
+      "api_close": 18050.0
+    }
+  ],
+  "empty_period": "2010: 0 observations",
+  "source_hash_unchanged": true
+}

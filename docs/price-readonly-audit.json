@@ -1,0 +1,187 @@
+{
+  "path": "G:\\내 드라이브\\skku_fds_main\\데이터\\KRX\\1_개별종목가격.csv",
+  "sha256": "fbdfa5eaddf5dde2855301c89876e96919eff0498d8f316c6a22aff702dd4755",
+  "rows": 50317,
+  "stock_count": 20,
+  "mapping_missing_in_prices": [],
+  "unmapped_price_codes": [],
+  "format_errors": [],
+  "duplicate_keys": [],
+  "unsorted_stocks": [],
+  "missing_fields": {},
+  "nonpositive_or_invalid_close_count": 0,
+  "invalid_examples": [],
+  "weekend_observations": 0,
+  "selected_stock": "089010",
+  "selected_all_count": 2700,
+  "selected_first": "2015-01-02",
+  "selected_last": "2025-12-30",
+  "selected_cutoff_count": 1227,
+  "samples": [
+    {
+      "stock_code": "089010",
+      "trade_date": "2015-01-02",
+      "close": "9650",
+      "daily_change_pct": "6.63"
+    },
+    {
+      "stock_code": "089010",
+      "trade_date": "2017-06-28",
+      "close": "6540",
+      "daily_change_pct": "-2.53"
+    },
+    {
+      "stock_code": "089010",
+      "trade_date": "2019-12-30",
+      "close": "18050",
+      "daily_change_pct": "2.56"
+    }
+  ],
+  "volume": "미제공",
+  "adjustment": "미확인",
+  "quality": "형식 검사만 수행; 원천 거래소 대조 및 거래정지/휴장 달력 정합성은 미검증",
+  "float_numeric_parsing_loss_count": 0,
+  "coverage_by_stock": [
+    {
+      "stock_code": "010170",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "032620",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "036890",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "038070",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "050540",
+      "count": 2054,
+      "first": "2015-01-02",
+      "last": "2023-05-04",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "052270",
+      "count": 564,
+      "first": "2015-01-02",
+      "last": "2017-04-12",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "053660",
+      "count": 1799,
+      "first": "2015-01-02",
+      "last": "2022-04-25",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "059090",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "059210",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "064260",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "065060",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "065350",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "068790",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "082800",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "083650",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "089010",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "093190",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "096350",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "097800",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    },
+    {
+      "stock_code": "153460",
+      "count": 2700,
+      "first": "2015-01-02",
+      "last": "2025-12-30",
+      "absent_dates_within_observed_range_vs_dataset_union": 0
+    }
+  ],
+  "calendar_note": "자료 전체에 등장하는 날짜 집합과의 비교이며 공식 거래소 달력·거래정지 사유 검증은 아님"
+}

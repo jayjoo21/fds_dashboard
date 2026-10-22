@@ -294,8 +294,32 @@ class DashboardTests(unittest.TestCase):
             server.shutdown()
             server.server_close()
 
+    def test_price_path_and_raw_source_preservation(self):
+        import os
+        from unittest.mock import patch
+        from decimal import Decimal
+        from server import price_csv_path
+        with patch.dict(os.environ, {'DART_PRICE_CSV': ''}):
+            self.assertEqual(price_csv_path(), ROOT/'KRX_20종목_2015-2025_확보자료'/'01_종목가격_2015-2025_수정주가미확인.csv')
+        with patch.dict(os.environ, {'DART_PRICE_CSV': str(self.s.price_path)}):
+            self.assertEqual(price_csv_path(), self.s.price_path)
+        by_key={(r['stock_code'],r['trade_date']):r for r in self.s.price_source_rows}
+        self.assertEqual(len(by_key),len(self.s.price_source_rows))
+        for stock, points in self.s.prices.items():
+            self.assertRegex(stock, r'^\d{6}$')
+            for point in points:
+                raw=by_key[stock,point['date']]
+                self.assertEqual(Decimal(str(point['close'])),Decimal(raw['close']))
+                self.assertIn('daily_change_pct',raw)
+                self.assertNotIn('daily_change_pct',point)
+        result=self.s.price_series('089010','2015-01-01','2019-12-31')
+        self.assertEqual(result['observation_count'],len(result['points']))
+        self.assertEqual(result['volume_status'],'not_provided')
+        self.assertEqual(result['adjustment_status'],'unverified')
+        self.assertEqual(result['quality_status'],'not_fully_validated')
+
     def test_real_price_csv_match_and_period_cutoff(self):
-        source=read_csv(ROOT/'KRX_20종목_2015-2025_확보자료'/'01_종목가격_2015-2025_수정주가미확인.csv')
+        source=read_csv(self.s.price_path)
         for company in self.s.companies:
             stock=company['stock_code']
             actual=self.s.price_series(stock,'2015-01-01','2019-12-31')
