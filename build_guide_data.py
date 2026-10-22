@@ -13,6 +13,8 @@
   journey   : 데이터 수집 단계별 실제 수치 (검증 JSON에서 읽음)
   links     : 드라이브 링크 (web/guide/drive_links.json 에서 사람이 채움)
 """
+import sys
+sys.dont_write_bytecode = True  # never write __pycache__ next to the drive's model code
 import argparse
 import csv
 import io
