@@ -377,6 +377,28 @@ def make_handler(store):
                     date.fromisoformat(asof)
                     if stock not in {r['stock_code'] for r in store.companies} or fs not in ('CFS', 'OFS'):
                         raise ValueError('기업 또는 재무제표 구분이 잘못되었습니다.')
+                    if parsed.path == '/api/model-inputs':
+                        from model_workbench import model_inputs
+                        start = args.get('from', '2015-01-01')
+                        date.fromisoformat(start)
+                        if start > asof:
+                            raise ValueError('시작일과 기준일 순서를 확인하세요.')
+                        reader = model_inputs(store)
+                        model = args.get('model', '')
+                        if model == 'ohlson':
+                            return self.send_json(reader.ohlson(stock, fs, start, asof, args.get('receipt', ''), float(args.get('rate', '.085'))))
+                        if model == 'fscore':
+                            return self.send_json(reader.fscore(stock, fs, start, asof, args.get('receipt', '')))
+                        raise ValueError('지원하지 않는 금융모형입니다.')
+                    if parsed.path in ('/api/pipeline-detail', '/api/audit-detail'):
+                        from data_workbench import workbench
+                        start = args.get('from', '2015-01-01')
+                        date.fromisoformat(start)
+                        if start > asof:
+                            raise ValueError('시작일과 기준일 순서를 확인하세요.')
+                        reader = workbench(store)
+                        method = reader.pipeline if parsed.path == '/api/pipeline-detail' else reader.quality
+                        return self.send_json(method(stock, fs, start, asof, args.get('receipt', ''), args.get('metric', 'sales_ttm')))
                     if parsed.path == '/api/series':
                         return self.send_json(store.series(stock, fs, asof))
                     if parsed.path == '/api/lineage':
@@ -421,6 +443,14 @@ def make_handler(store):
                 files = {'/': ('index.html', 'text/html'), '/app.js': ('app.js', 'text/javascript'), '/platform.js': ('platform.js', 'text/javascript'), '/story.js': ('story.js', 'text/javascript'), '/lineage.js': ('lineage.js', 'text/javascript'), '/pipeline.js': ('pipeline.js','text/javascript'), '/pipeline.css': ('pipeline.css','text/css'), '/dupont.js': ('dupont.js','text/javascript'), '/dupont.css': ('dupont.css','text/css'), '/flow-vendor.js': ('flow-vendor.js','text/javascript'), '/flow-vendor.css': ('flow-vendor.css','text/css'), '/motion-vendor.js': ('motion-vendor.js', 'text/javascript'), '/style.css': ('style.css', 'text/css')}
                 # Isolated design prototypes; existing pages and API handlers are unchanged.
                 files.update({
+                    '/research/ohlson': ('model-lab/index.html', 'text/html'),
+                    '/research/fscore': ('model-lab/index.html', 'text/html'),
+                    '/research/model-lab.js': ('model-lab/app.js', 'text/javascript'),
+                    '/research/model-lab.css': ('model-lab/style.css', 'text/css'),
+                    '/research/pipeline': ('data-workbench/index.html', 'text/html'),
+                    '/research/quality': ('data-workbench/index.html', 'text/html'),
+                    '/research/data-workbench.js': ('data-workbench/app.js', 'text/javascript'),
+                    '/research/data-workbench.css': ('data-workbench/style.css', 'text/css'),
                     '/research/company': ('research/index.html', 'text/html'),
                     '/research/lineage': ('research/index.html', 'text/html'),
                     '/research/app.js': ('research/app.js', 'text/javascript'),

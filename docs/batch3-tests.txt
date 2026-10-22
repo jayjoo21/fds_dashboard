@@ -1,0 +1,24 @@
+test_annual_comparison_and_source_cutoff (test_model_workbench.ModelInputTests.test_annual_comparison_and_source_cutoff) ... ok
+test_ohlson_asof_filters_future_corrections (test_model_workbench.ModelInputTests.test_ohlson_asof_filters_future_corrections) ... ok
+test_ohlson_missing_prior_and_ofs_do_not_get_replacements (test_model_workbench.ModelInputTests.test_ohlson_missing_prior_and_ofs_do_not_get_replacements) ... ok
+test_ohlson_one_year_capital_and_review_scenario (test_model_workbench.ModelInputTests.test_ohlson_one_year_capital_and_review_scenario) ... ok
+test_review_is_unjudged_not_zero_and_missing_debt_issue_not_inferred (test_model_workbench.ModelInputTests.test_review_is_unjudged_not_zero_and_missing_debt_issue_not_inferred) ... ok
+test_scenario_rate_bounds_and_no_hidden_value_on_missing_input (test_model_workbench.ModelInputTests.test_scenario_rate_bounds_and_no_hidden_value_on_missing_input) ... ok
+test_verdict_gate_and_strict_improvement (test_model_workbench.ModelInputTests.test_verdict_gate_and_strict_improvement) ... ok
+test_audit_records_keep_exact_scope_and_review (test_data_workbench.WorkbenchTests.test_audit_records_keep_exact_scope_and_review) ... ok
+test_confirmed_errors_preserve_original_and_affected_columns (test_data_workbench.WorkbenchTests.test_confirmed_errors_preserve_original_and_affected_columns) ... ok
+test_daily_rows_are_stored_event_rows_with_cutoff (test_data_workbench.WorkbenchTests.test_daily_rows_are_stored_event_rows_with_cutoff) ... ok
+test_mismatched_audit_value_cannot_inherit_pass (test_data_workbench.WorkbenchTests.test_mismatched_audit_value_cannot_inherit_pass) ... ok
+test_stored_ttm_terms_and_original_quarter_method (test_data_workbench.WorkbenchTests.test_stored_ttm_terms_and_original_quarter_method) ... ok
+test_identifiers_and_counts (test_dashboard.DashboardTests.test_identifiers_and_counts) ... ok
+test_formulas_without_replacing_csv (test_dashboard.DashboardTests.test_formulas_without_replacing_csv) ... ok
+test_asof_and_unknown_receipt_fail_closed (test_dashboard.DashboardTests.test_asof_and_unknown_receipt_fail_closed) ... ok
+test_independent_confirmed_errors_are_flagged_not_silently_replaced (test_dashboard.DashboardTests.test_independent_confirmed_errors_are_flagged_not_silently_replaced) ... ok
+test_fact_links_and_ttm_multiple_receipts (test_dashboard.DashboardTests.test_fact_links_and_ttm_multiple_receipts) ... ok
+test_price_path_and_raw_source_preservation (test_dashboard.DashboardTests.test_price_path_and_raw_source_preservation) ... ok
+test_real_price_csv_match_and_period_cutoff (test_dashboard.DashboardTests.test_real_price_csv_match_and_period_cutoff) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 44.304s
+
+OK

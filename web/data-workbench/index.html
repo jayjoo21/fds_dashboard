@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FDS · 데이터 작업실</title><link rel="stylesheet" href="/research/data-workbench.css"><script defer src="/research/data-workbench.js"></script></head>
+<body>
+<a class="skip" href="#workspace">작업면으로 건너뛰기</a>
+<header><a class="brand" href="/design-preview/overview">FDS<span>.</span></a><nav aria-label="데이터 연구"><a data-route="pipeline" href="/research/pipeline">수집·처리</a><a data-route="quality" href="/research/quality">품질·검증</a><a data-legacy="lineage" href="/research/lineage">계보·공시 ↗</a><a href="/research/company">기업 분석 ↗</a></nav><button id="motion" aria-pressed="false">동작 줄이기</button></header>
+<main><div class="intro"><p class="eyebrow" id="eyebrow"></p><h1 id="title"></h1><p id="subtitle"></p></div>
+<form id="context"><label>기업<select name="stock" aria-label="기업"></select></label><label>재무제표<select name="fs" aria-label="재무제표"><option value="CFS">연결 CFS</option><option value="OFS">별도 OFS</option></select></label><label>시작일<input type="date" name="from" aria-label="시작일" required></label><label>분석 기준일<input type="date" name="asof" aria-label="분석 기준일" required></label><button class="apply" type="submit">적용 →</button></form>
+<p id="notice" role="status" aria-live="polite"></p>
+<div class="observation-tools"><label>공시 이벤트<select id="receipt" aria-label="공시 이벤트"></select></label><label>추적할 금액<select id="metric" aria-label="추적할 금액"><option value="sales_ttm">매출액 TTM</option><option value="operating_profit_ttm">영업이익 TTM</option></select></label><label class="consent"><input id="review" type="checkbox">검토용 실제 금액 표시 · REVIEW</label></div>
+<div id="selection"></div><div id="workspace" tabindex="-1"></div>
+<footer>원본 읽기 전용 · 전체 상태 REVIEW · 산식 대조와 회계 의미 검증은 별개입니다.</footer></main>
+<dialog id="inspector" aria-labelledby="inspector-title"><div class="dialog-head"><p class="eyebrow">SOURCE / INSPECTION RECORD</p><button id="close-inspector" aria-label="상세 닫기">닫기 ×</button></div><h2 id="inspector-title"></h2><div id="inspector-body"></div></dialog>
+<div id="tooltip" role="tooltip" hidden></div>
+</body></html>

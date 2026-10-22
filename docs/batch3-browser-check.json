@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-22",
+  "base_url": "http://127.0.0.1:8772",
+  "desktop_viewport": [1440, 1000],
+  "mobile_viewport": [390, 844],
+  "mobile_document_width": 375,
+  "browser_console_errors_and_warnings": 0,
+  "checked": [
+    "Ohlson REVIEW input and scenario opt-ins, default withholding",
+    "Chemtronics CFS 2019Q3 current and previous-year same-quarter capital",
+    "8.5 to 8.6 percent keyboard scenario arithmetic",
+    "OFS exclusion and missing-input withholding",
+    "Company, receipt and date selection; rapid company/date changes",
+    "Annual F-Score 2018 vs 2017 with 2016 asset inputs",
+    "PIT 2019-04-01 excludes annual receipt available 2019-04-02",
+    "F-Score condition inputs, fact_id, audit status, DART report and actual XML matches",
+    "Missing LTD and issuance remain unjudged, no full score",
+    "Mobile group navigation and source dialog",
+    "Hover, click, scroll, Enter, Escape and source focus return",
+    "Reduced motion yields zero transition duration"
+  ],
+  "ohlson_example": {
+    "stock": "089010", "fs": "CFS", "receipt": "20191113000024",
+    "current_equity": 94913084567,
+    "ni_owner_ttm": 25489766525,
+    "previous_year_same_quarter_equity": 78197600711,
+    "rate_percent": 8.5,
+    "scenario_rounded": 18842970464.57,
+    "status": "REVIEW scenario only; no equity valuation"
+  },
+  "fscore_example": {
+    "stock": "089010", "fs": "CFS", "annual_year": 2018,
+    "available_date": "2019-04-02", "judged_count": 0,
+    "unjudged_count": 9, "complete_score": null
+  },
+  "tests": {"existing": 12, "new": 7, "passed": 19, "seconds": 44.304},
+  "limitations": [
+    "Financial account semantics remain REVIEW",
+    "No complete LTD scope or explicit common stock issuance source",
+    "Owner inputs lack an unambiguous fact_id join; raw account candidates are not promoted",
+    "No artificial network latency, all-company census or exhaustive assistive-technology testing",
+    "Source preservation hash check covers the 14 previously baselined files"
+  ],
+  "screenshots_directory": "C:/Users/SD1-06/.codex/visualizations/2026/10/22/01a16224-7102-7c71-a6f9-91d1a7a67daf",
+  "screenshots": ["batch3-ohlson-desktop.png", "batch3-ohlson-mobile.png", "batch3-fscore-desktop.png", "batch3-fscore-mobile.png"]
+}

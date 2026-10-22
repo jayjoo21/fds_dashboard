@@ -1,0 +1,90 @@
+{
+  "batch2": [
+    {
+      "file": "data_workbench.py",
+      "unchanged": true
+    },
+    {
+      "file": "test_data_workbench.py",
+      "unchanged": true
+    },
+    {
+      "file": "web/data-workbench/index.html",
+      "unchanged": true
+    },
+    {
+      "file": "web/data-workbench/app.js",
+      "unchanged": true
+    },
+    {
+      "file": "web/data-workbench/style.css",
+      "unchanged": true
+    },
+    {
+      "file": "docs/batch2-tests.txt",
+      "unchanged": true
+    },
+    {
+      "file": "docs/batch2-input-hashes.json",
+      "unchanged": true
+    }
+  ],
+  "source": [
+    {
+      "file": "02_원문기간별금액_corp추가.csv",
+      "unchanged": true
+    },
+    {
+      "file": "03_공시시점별_분기변환_corp추가.csv",
+      "unchanged": true
+    },
+    {
+      "file": "25_공시시점별_NOA_DuPont_Ohlson_입력_최종.csv",
+      "unchanged": true
+    },
+    {
+      "file": "26_일별_NOA_DuPont_Ohlson_입력_최종.csv",
+      "unchanged": true
+    },
+    {
+      "file": "기업코드_공식대조.csv",
+      "unchanged": true
+    },
+    {
+      "file": "공시날짜_공식목록대조.csv",
+      "unchanged": true
+    },
+    {
+      "file": "공시날짜_PIT_전수검증.csv",
+      "unchanged": true
+    },
+    {
+      "file": "원천계정_금액대조.csv",
+      "unchanged": true
+    },
+    {
+      "file": "03_분기산식_독립검증.csv",
+      "unchanged": true
+    },
+    {
+      "file": "TTM_전수재계산_대조.csv",
+      "unchanged": true
+    },
+    {
+      "file": "API_XML_원천대조.csv",
+      "unchanged": true
+    },
+    {
+      "file": "확인오류_영향범위.csv",
+      "unchanged": true
+    },
+    {
+      "file": "일별데이터_시점검증.csv",
+      "unchanged": true
+    },
+    {
+      "file": "1_개별종목가격.csv",
+      "unchanged": true
+    }
+  ]
+}

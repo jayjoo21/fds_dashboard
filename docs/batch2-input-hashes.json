@@ -1,0 +1,61 @@
+{
+  "scope": "Before final regression and browser validation; not a pre-implementation source audit",
+  "files": [
+    {
+      "file": "02_원문기간별금액_corp추가.csv",
+      "sha256_before": "58c0a8695a02123abaecc5ac3f9fabee2328cbda66faea669aff96c5e9784220"
+    },
+    {
+      "file": "03_공시시점별_분기변환_corp추가.csv",
+      "sha256_before": "4549d793dbf1995aa2d588221764803360c9fca8b96232be61fbf1726fdfb12d"
+    },
+    {
+      "file": "25_공시시점별_NOA_DuPont_Ohlson_입력_최종.csv",
+      "sha256_before": "80723825364dde9b1f7b65c5c2d7750773c2c7fc7fac48608d579d1f2666c3b7"
+    },
+    {
+      "file": "26_일별_NOA_DuPont_Ohlson_입력_최종.csv",
+      "sha256_before": "63a810719764cd867a1ce2132b009c68298c8994fcfeabcc6b3a0e82e68e03ae"
+    },
+    {
+      "file": "기업코드_공식대조.csv",
+      "sha256_before": "d491813ee1247098d322c7f08804f780be5cd6ba2a6920e0c34c0a77ef791b39"
+    },
+    {
+      "file": "공시날짜_공식목록대조.csv",
+      "sha256_before": "9a2928d53f72e32fa5ab8b6f637903e8e8d24dccc04a487a2676c0602d160e87"
+    },
+    {
+      "file": "공시날짜_PIT_전수검증.csv",
+      "sha256_before": "dda1a126b02066280863c67b30b064759e4adffb74c21f1854265cef9e897f1c"
+    },
+    {
+      "file": "원천계정_금액대조.csv",
+      "sha256_before": "700dfc06703caf47f8bbbcc99083f3d488aca6b4f807875695d1c5088e31f028"
+    },
+    {
+      "file": "03_분기산식_독립검증.csv",
+      "sha256_before": "f1fdf0d888815f443dc109a9898d6ecf6ca8630a62e6ba88c7f68e1fa5c7d035"
+    },
+    {
+      "file": "TTM_전수재계산_대조.csv",
+      "sha256_before": "3dfade478f22db6bbdb29c5e29963a5832175bb54ed459c961595e498610c957"
+    },
+    {
+      "file": "API_XML_원천대조.csv",
+      "sha256_before": "4a028424b7ce21798f69757a2d03424a6360510f0541704c4fbd96c7d68012ce"
+    },
+    {
+      "file": "확인오류_영향범위.csv",
+      "sha256_before": "9441753b7cd00083bb6fa04c9b089718bd2bc716082c290b6eea94450100f356"
+    },
+    {
+      "file": "일별데이터_시점검증.csv",
+      "sha256_before": "fd9dd6e264616f9155feb4210f499d355764c7e0dcc2f835360cd0f54ad9c19f"
+    },
+    {
+      "file": "1_개별종목가격.csv",
+      "sha256_before": "fbdfa5eaddf5dde2855301c89876e96919eff0498d8f316c6a22aff702dd4755"
+    }
+  ]
+}
