@@ -1,0 +1,9 @@
+{
+  "server.py": "3f5e39af5bc51ebfd72589d9a0d724da108ad3ebc16bd05016587361127c6e84",
+  "lineage.py": "be3a1558b7775656dedcafba6426f6c61bfdadde95fdcbb2ace8b209eca22ad4",
+  "provenance.py": "4f124f235ff8859044be71102be4145bdfbaaafe612ecc3fbc6d60a23b9ced4f",
+  "web/index.html": "52bd9399682fc42bddee325b274f2e9266436ac3627ee2581c696b5592a07797",
+  "web/dupont.js": "604a5dfce6c7049ff02d425cfa6fa8c015362a69577b14f8b38e7e8266daabe0",
+  "web/dupont.css": "96b20667fe4a21e37cf5a58ebfd29da5bb34d16128a7c38322e922d43fb4e0b5",
+  "web/design-preview/style.css": "ffdaf6cd10572bb6be0553c4a49c3b1acc66dcfe3880b430c27e70ddac27a6fc"
+}
