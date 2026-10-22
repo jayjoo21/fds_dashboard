@@ -459,11 +459,18 @@ def make_handler(store):
                     '/design-preview/dupont': ('design-preview/index.html', 'text/html'),
                     '/design-preview/style.css': ('design-preview/style.css', 'text/css'),
                     '/design-preview/app.js': ('design-preview/app.js', 'text/javascript'),
+                    # Read-only explainer site built by build_guide_data.py
+                    '/guide': ('guide/index.html', 'text/html'),
+                    '/guide/': ('guide/index.html', 'text/html'),
+                    '/guide/style.css': ('guide/style.css', 'text/css'),
+                    '/guide/core.js': ('guide/core.js', 'text/javascript'),
+                    '/guide/pages.js': ('guide/pages.js', 'text/javascript'),
+                    '/guide/data.json': ('guide/data.json', 'application/json'),
                 })
                 if parsed.path not in files:
                     return self.send_json({'error': '파일 접근이 허용되지 않습니다.'}, 404)
                 file, mime = files[parsed.path]
-                self.respond((WEB / file).read_bytes(), mime + '; charset=utf-8')
+                self.respond((WEB / file).read_bytes(), mime + '; charset=utf-8', guide=parsed.path.startswith('/guide'))
             except (ValueError, KeyError) as e:
                 self.send_json({'error': str(e)}, 400)
             except Exception:
@@ -472,13 +479,16 @@ def make_handler(store):
         def send_json(self, value, code=200):
             self.respond(json.dumps(value, ensure_ascii=False, allow_nan=False).encode('utf-8'), 'application/json; charset=utf-8', code)
 
-        def respond(self, data, mime, code=200):
+        def respond(self, data, mime, code=200, guide=False):
             self.send_response(code)
             self.send_header('Content-Type', mime)
             self.send_header('Content-Length', str(len(data)))
             self.send_header('Cache-Control', 'no-store')
             self.send_header('X-Content-Type-Options', 'nosniff')
-            self.send_header('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
+            # The read-only /guide pages use inline style attributes and the Pretendard web font; scripts stay 'self' only.
+            csp = ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src https://cdn.jsdelivr.net; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+                   if guide else "default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
+            self.send_header('Content-Security-Policy', csp)
             self.end_headers()
             self.wfile.write(data)
 

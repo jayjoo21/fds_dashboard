@@ -28,3 +28,7 @@ __pycache__/
 .venv/
 venv/
 *.log
+
+# Guide site: generated from the shared drive (real data, drive link); regenerate with build_guide_data.py
+web/guide/data.json
+web/guide/drive_links.json
